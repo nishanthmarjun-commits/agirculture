@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Crop Yield Prediction System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 50%, #CDDC39 100%);
+        }
+        .prediction-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .prediction-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        .input-field {
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-seedling text-green-600 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-gray-800">AgriPredict AI</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#predict" class="text-gray-600 hover:text-green-600 px-3 py-2">Predict</a>
+                    <a href="#how-it-works" class="text-gray-600 hover:text-green-600 px-3 py-2">How It Works</a>
+                    <a href="#features" class="text-gray-600 hover:text-green-600 px-3 py-2">Features</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">AI-Powered Crop Yield Prediction</h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+                    Leverage machine learning to predict crop yields with 92% accuracy using environmental and agricultural data
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#predict" class="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
+                        <i class="fas fa-calculator mr-2"></i>Predict Yield
+                    </a>
+                    <a href="#how-it-works" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition duration-300">
+                        <i class="fas fa-info-circle mr-2"></i>Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prediction Section -->
+    <section id="predict" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Crop Yield Prediction</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Input your agricultural data below to get an AI-powered prediction of your crop yield
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Input Form -->
+                <div class="prediction-card bg-white rounded-xl p-8 border border-gray-200">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-6">Enter Farm Data</h3>
+                    
+                    <form id="predictionForm" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Crop Type</label>
+                            <select class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                                <option value="wheat">Wheat</option>
+                                <option value="corn">Corn</option>
+                                <option value="rice">Rice</option>
+                                <option value="soybean">Soybean</option>
+                                <option value="barley">Barley</option>
+                            </select>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Temperature (°C)</label>
+                                <input type="number" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="e.g., 25" value="25">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Rainfall (mm)</label>
+                                <input type="number" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="e.g., 800" value="800">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Soil pH</label>
+                                <input type="number" step="0.1" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="e.g., 6.5" value="6.5">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nitrogen (kg/ha)</label>
+                                <input type="number" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="e.g., 120" value="120">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Phosphorus (kg/ha)</label>
+                                <input type="number" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="e.g., 60" value="60">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Potassium (kg/ha)</label>
+                                <input type="number" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="e.g., 80" value="80">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Sunlight Hours (daily)</label>
+                            <input type="number" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="e.g., 8" value="8">
+                        </div>
+
+                        <button type="button" onclick="predictYield()" class="w-full bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition duration-300">
+                            <i class="fas fa-brain mr-2"></i>Predict Yield
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Results Display -->
+                <div class="prediction-card bg-gray-50 rounded-xl p-8 border border-gray-200">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-6">Prediction Results</h3>
+                    
+                    <div id="results" class="text-center py-12">
+                        <div class="text-gray-400 mb-4">
+                            <i class="fas fa-chart-line text-4xl"></i>
+                        </div>
+                        <p class="text-gray-500">Enter your data and click "Predict Yield" to see results</p>
+                    </div>
+
+                    <div class="mt-8">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Yield Optimization Tips</h4>
+                        <div class="space-y-3 text-sm text-gray-600">
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <span>Maintain soil pH between 6.0-7.0 for optimal nutrient absorption</span>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <span>Ensure adequate nitrogen levels (100-150 kg/ha) for most crops</span>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <span>Monitor rainfall patterns and supplement irrigation when needed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">How Our AI Works</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Advanced machine learning algorithms analyze multiple factors to predict crop yields with high accuracy
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-database text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Data Collection</h3>
+                    <p class="text-gray-600">We gather historical data on weather patterns, soil quality, and crop performance from thousands of farms worldwide.</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-brain text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Machine Learning</h3>
+                    <p class="text-gray-600">Our AI uses Random Forest and Neural Network algorithms to identify patterns and relationships in the data.</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-chart-line text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Prediction</h3>
+                    <p class="text-gray-600">The model generates accurate yield predictions and provides actionable insights for optimization.</p>
+                </div>
+            </div>
+
+            <div class="mt-16 bg-white rounded-xl p-8">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-6">Key Predictive Factors</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <canvas id="factorImportanceChart" width="400" height="300"></canvas>
+                    </div>
+                    <div>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm font-medium text-gray-700">Temperature</span>
+                                    <span class="text-sm text-gray-600">85% importance</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-600 h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm font-medium text-gray-700">Rainfall</span>
+                                    <span class="text-sm text-gray-600">78% importance</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 78%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm font-medium text-gray-700">Soil Nutrients</span>
+                                    <span class="text-sm text-gray-600">72% importance</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-400 h-2 rounded-full" style="width: 72%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm font-medium text-gray-700">Sunlight</span>
+                                    <span class="text-sm text-gray-600">65% importance</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-300 h-2 rounded-full" style="width: 65%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Advanced Features</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Comprehensive tools for modern agricultural planning and optimization
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <i class="fas fa-cloud-sun text-blue-500 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Weather Integration</h3>
+                    <p class="text-gray-600">Real-time weather data integration for accurate environmental impact assessment.</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <i class="fas fa-map-marked-alt text-green-500 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Geospatial Analysis</h3>
+                    <p class="text-gray-600">Location-based predictions considering regional climate and soil variations.</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <i class="fas fa-history text-purple-500 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Historical Trends</h3>
+                    <p class="text-gray-600">Analysis of historical yield data to identify long-term patterns and trends.</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <i class="fas fa-sliders-h text-orange-500 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Optimization Scenarios</h3>
+                    <p class="text-gray-600">Test different farming strategies and see their potential impact on yield.</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <i class="fas fa-mobile-alt text-red-500 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Mobile Access</h3>
+                    <p class="text-gray-600">Access predictions and insights from anywhere using our mobile-responsive platform.</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <i class="fas fa-chart-pie text-yellow-500 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Visual Analytics</h3>
+                    <p class="text-gray-600">Interactive charts and graphs to better understand yield factors and predictions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">AgriPredict AI</h4>
+                    <p class="text-gray-400">Advanced crop yield prediction using machine learning and artificial intelligence.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#predict" class="text-gray-400 hover:text-white">Predict Yield</a></li>
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-white">How It Works</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-white">Features</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Documentation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">API Access</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Research Papers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact</h4>
+                    <p class="text-gray-400">Email: info@agripredict.ai</p>
+                    <p class="text-gray-400">Phone: +1 (555) 123-4567</p>
+                </div>
+            </div>
